@@ -1,0 +1,21 @@
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        ans = 0
+        counter = 0
+        hashTable = dict()
+
+        for num in nums:
+            hashTable[num] = True
+
+        x = min(hashTable.keys())
+        for i in range(len(nums)-1):
+            if x in hashTable.keys():
+                hashTable.pop(x)
+                counter += 1
+                ans = max(ans, counter)
+                x += 1
+            else:
+                x = min(hashTable.keys())
+                counter = 0
+
+        return ans
